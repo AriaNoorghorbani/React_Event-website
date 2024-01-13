@@ -1,22 +1,40 @@
-import { Form, useNavigate } from "react-router-dom";
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 
 import classes from "./EventForm.module.css";
 
 export default function EventForm({ method, event }) {
   const navigate = useNavigate();
+
+  const data = useActionData();
+
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting" ? true : false;
+
   function cancelHandler() {
     navigate("..");
   }
 
   return (
     <Form method="post" className={classes.form}>
+      {data && (
+        <ul>
+          {Object.values(data.errors).map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+      )}
       <p>
         <label htmlFor="title">Title</label>
         <input
           id="title"
           type="text"
           name="title"
-          required
+          // required
           defaultValue={event ? event.title : ""}
         />
       </p>
@@ -26,7 +44,7 @@ export default function EventForm({ method, event }) {
           id="image"
           type="url"
           name="image"
-          required
+          // required
           defaultValue={event ? event.image : ""}
         />
       </p>
@@ -36,7 +54,7 @@ export default function EventForm({ method, event }) {
           id="date"
           type="date"
           name="date"
-          required
+          // required
           defaultValue={event ? event.date : ""}
         />
       </p>
@@ -46,15 +64,15 @@ export default function EventForm({ method, event }) {
           id="description"
           name="description"
           rows="5"
-          required
+          // required
           defaultValue={event ? event.description : ""}
         />
       </p>
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
-        <button>Save</button>
+        <button>{isSubmitting ? "Submitting..." : "Send"}</button>
       </div>
     </Form>
   );
