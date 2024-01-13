@@ -7,10 +7,11 @@ import EventDetail from './pages/EventDetail'
 import EditEvent from './pages/EditEvent'
 import Home from './pages/Home';
 import EventLayout from './pages/EventLayout'
+import Error from './pages/Error';
 
 const router = createBrowserRouter([
   {
-    path: '/', element: <RootLayout />, children: [
+    path: '/', element: <RootLayout />, errorElement: <Error />, children: [
       { index: true, element: <Home /> },
       {
         path: 'events',
@@ -30,10 +31,8 @@ const router = createBrowserRouter([
   }
 ])
 
-
 function App() {
   return <RouterProvider router={router} />;
 }
-
 
 export default App;
