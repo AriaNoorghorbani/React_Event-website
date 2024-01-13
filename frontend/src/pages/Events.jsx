@@ -6,6 +6,7 @@ export default function EventsPage() {
   const data = useLoaderData();
 
   const events = data.events;
+
   return <EventsList events={events} />;
 }
 
