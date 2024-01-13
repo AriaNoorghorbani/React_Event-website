@@ -8,11 +8,8 @@ export default function Error() {
   let title = "An error occurred";
   let message = "Something went wrong";
 
-  if (error.status === 200) {
-    const parsedData = JSON.parse(error.data);
-    if (parsedData && parsedData.message) {
-      message = parsedData.message;
-    }
+  if (error.status === 500) {
+    message = error.data.message;
   }
 
   if (error.status === 404) {
