@@ -1,6 +1,6 @@
-import classes from './NewsletterSignup.module.css';
+import classes from "./NewsletterSignup.module.css";
 
-function NewsletterSignup() {
+export default function NewsletterSignup() {
   return (
     <form method="post" className={classes.newsletter}>
       <input
@@ -12,5 +12,3 @@ function NewsletterSignup() {
     </form>
   );
 }
-
-export default NewsletterSignup;
