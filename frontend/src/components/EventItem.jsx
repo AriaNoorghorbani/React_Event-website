@@ -1,9 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 import classes from "./EventItem.module.css";
 
 export default function EventItem({ event }) {
+  const submit = useSubmit();
+
   function startDeleteHandler() {
-    // ...
+    const proceed = window.confirm("Are you sure for delete?");
+
+    if (proceed) {
+      submit(null, { method: "delete" });
+    }
   }
 
   return (
