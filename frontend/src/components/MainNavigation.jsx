@@ -40,7 +40,7 @@ export default function MainNavigation() {
             </NavLink>
           </li>
           <NavLink
-            to="/auth"
+            to="/auth?mode=login"
             className={({ isActive }) =>
               isActive ? classes.active : undefined
             }
