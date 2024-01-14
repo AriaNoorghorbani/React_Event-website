@@ -11,13 +11,12 @@ export async function action({ request }) {
     email: data.get("email"),
     password: data.get("password"),
   };
-
   const searchParams = new URL(request.url).searchParams;
   let mode = searchParams.get("mode") || "login";
 
-  if (mode === "login" || mode === "signup") {
-    mode = "login";
-  }
+  // if (mode === "login" || mode === "signup") {
+  //   mode = "login";
+  // }
 
   const response = await fetch("http://localhost:8080/" + mode, {
     method: "POST",
@@ -32,7 +31,7 @@ export async function action({ request }) {
   }
 
   if (!response.ok) {
-    throw json({ message: "Could not authenticate user." });
+    throw json({ message: "Could not authenticate user." }, { status: 500 });
   }
 
   return redirect("/");
