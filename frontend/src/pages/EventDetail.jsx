@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
+import getToken from "../util/auth";
 
 export default function EventDetail() {
   const data = useRouteLoaderData("event-detail");
@@ -35,9 +36,12 @@ export async function loader({ request, params }) {
 
 export async function action({ request, params }) {
   const eventId = params.eventId;
-
+  const token = getToken();
   const response = await fetch("http://localhost:8080/events/" + eventId, {
     method: request.method,
+    headers: {
+      Authorization: "bearer " + token,
+    },
   });
 
   if (!response.ok) {

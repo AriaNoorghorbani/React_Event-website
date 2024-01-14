@@ -6,12 +6,13 @@ import {
   redirect,
   json,
 } from "react-router-dom";
+import getToken from "../util/auth";
 
 import classes from "./EventForm.module.css";
 
 export default function EventForm({ method, event }) {
   const navigate = useNavigate();
-
+  console.log("aaaa" + method);
   const data = useActionData();
 
   const navigation = useNavigation();
@@ -91,16 +92,21 @@ export async function action({ request, params }) {
     description: data.get("description"),
   };
 
+  console.log(request);
+  console.log(method);
+
   let url = "http://localhost:8080/events";
   if (method === "PATCH") {
     const eventId = params.eventId;
-    url += `/${eventId}`;
+    url = "http://localhost:8080/events/" + eventId;
   }
 
+  const token = getToken();
   const response = await fetch(url, {
     method: method,
     body: JSON.stringify(eventData),
     headers: {
+      Authorization: "bearer " + token,
       "Content-Type": "application/json",
     },
   });
