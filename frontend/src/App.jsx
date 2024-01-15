@@ -15,12 +15,15 @@ import { action as manipulateEvent } from "./components/EventForm";
 import NewsletterPage, { action as newsletterAction } from "./pages/Newsletter";
 import Authentication, { action as authAction } from "./pages/Authentication";
 import { action as logoutAction } from "./pages/Logout";
+import { tokenLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
     errorElement: <Error />,
+    loader: tokenLoader,
+    id: "token",
     children: [
       {
         index: true,

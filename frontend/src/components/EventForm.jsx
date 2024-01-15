@@ -12,7 +12,6 @@ import classes from "./EventForm.module.css";
 
 export default function EventForm({ method, event }) {
   const navigate = useNavigate();
-  console.log("aaaa" + method);
   const data = useActionData();
 
   const navigation = useNavigation();
@@ -23,7 +22,7 @@ export default function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="post" className={classes.form}>
+    <Form method={method} className={classes.form}>
       {data && (
         <ul>
           {Object.values(data.errors).map((error) => (
@@ -37,7 +36,7 @@ export default function EventForm({ method, event }) {
           id="title"
           type="text"
           name="title"
-          // required
+          required
           defaultValue={event ? event.title : ""}
         />
       </p>
@@ -47,7 +46,7 @@ export default function EventForm({ method, event }) {
           id="image"
           type="url"
           name="image"
-          // required
+          required
           defaultValue={event ? event.image : ""}
         />
       </p>
@@ -57,7 +56,7 @@ export default function EventForm({ method, event }) {
           id="date"
           type="date"
           name="date"
-          // required
+          required
           defaultValue={event ? event.date : ""}
         />
       </p>
@@ -67,7 +66,7 @@ export default function EventForm({ method, event }) {
           id="description"
           name="description"
           rows="5"
-          // required
+          required
           defaultValue={event ? event.description : ""}
         />
       </p>

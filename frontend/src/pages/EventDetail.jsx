@@ -1,11 +1,4 @@
-import {
-  useParams,
-  json,
-  useLoaderData,
-  useRouteLoaderData,
-  redirect,
-  useSubmit,
-} from "react-router-dom";
+import { json, useRouteLoaderData, redirect } from "react-router-dom";
 
 import EventItem from "../components/EventItem";
 import getToken from "../util/auth";
@@ -35,6 +28,7 @@ export async function loader({ request, params }) {
 }
 
 export async function action({ request, params }) {
+  console.log(request);
   const eventId = params.eventId;
   const token = getToken();
   const response = await fetch("http://localhost:8080/events/" + eventId, {
