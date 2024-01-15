@@ -91,9 +91,6 @@ export async function action({ request, params }) {
     description: data.get("description"),
   };
 
-  console.log(request);
-  console.log(method);
-
   let url = "http://localhost:8080/events";
   if (method === "PATCH") {
     const eventId = params.eventId;
